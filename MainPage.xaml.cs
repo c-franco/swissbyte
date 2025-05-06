@@ -3,6 +3,8 @@ using Android.Views;
 using Microsoft.Maui.Platform;
 #endif
 
+using swissbyte.Boxes.Compra;
+
 namespace swissbyte
 {
     public partial class MainPage : ContentPage
@@ -24,14 +26,13 @@ namespace swissbyte
                 var color = (Color)Application.Current.Resources["MainGray"];
                 var androidColor = color.ToPlatform();
                 window.SetStatusBarColor(androidColor);    
-                //window.DecorView.SystemUiVisibility = (StatusBarVisibility)SystemUiFlags.LightStatusBar;
             }
             #endif
         }
 
-        private async void Box1_Tapped(object sender, EventArgs e)
+        private async void Compra_Tapped(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new Box1Page());
+            await Navigation.PushAsync(new CompraPage());
         }
     }
 }

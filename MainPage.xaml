@@ -7,15 +7,9 @@
     <ScrollView>
         <VerticalStackLayout>
             
-            <Label Text="SwissByte"
-               HorizontalOptions="Center"
-               FontAttributes="Bold"
-               FontSize="Title"
-               FontFamily="OpenSansBold"
-               TextColor="White"
-               Margin="0,30,0,0"/>
+            <Label Text="SwissByte" HorizontalOptions="Center" FontAttributes="Bold" FontSize="Title" FontFamily="OpenSansBold" TextColor="White" Margin="0,30,0,10"/>
 
-            <Grid Padding="40" RowSpacing="15" ColumnSpacing="15">
+            <Grid Padding="30" RowSpacing="15" ColumnSpacing="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -29,11 +23,11 @@
                 <!-- Caja 1 -->
                 <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">          
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
-                        <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
-                        <Label Text="Caja 1" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/> 
+                        <Label Text="🛒" FontSize="15" HorizontalOptions="Center"/>
+                        <Label Text="Compra" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/> 
                     </VerticalStackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Box1_Tapped" />
+                        <TapGestureRecognizer Tapped="Compra_Tapped" />
                     </Frame.GestureRecognizers>
                 </Frame>
 

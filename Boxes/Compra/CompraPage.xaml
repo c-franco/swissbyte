@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="swissbyte.Boxes.Compra.CompraPage"
+             xmlns:compra="clr-namespace:swissbyte.Boxes.Compra"
+             BackgroundColor="{StaticResource MainGray}"
+             Shell.BackgroundColor="{StaticResource MainGray}"
+             Shell.ForegroundColor="{StaticResource GrayText}"
+             Shell.TitleColor="{StaticResource GrayText}"
+             Title="Lista de la compra">
+
+    <VerticalStackLayout Spacing="10">
+        <CollectionView ItemsSource="{Binding Items}" Margin="10,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10,4" ColumnDefinitions="Auto,*,Auto" WidthRequest="{Binding Source={x:Reference MainPage}, Path=Width}">
+                        <CheckBox Grid.Column="0" VerticalOptions="Center" Color="{StaticResource GrayText}"/>
+                        <Entry Grid.Column="1" Text="{Binding Text}" FontSize="16" HorizontalOptions="FillAndExpand" TextColor="{StaticResource GrayText}"/>
+                        <Button Grid.Column="2" Text="❌" Clicked="OnRemoveClicked" CommandParameter="{Binding .}" BackgroundColor="Transparent" FontSize="10" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="+  Añadir elemento" Clicked="OnAddClicked" BackgroundColor="Transparent" TextColor="{StaticResource GrayText}" FontSize="15" FontAttributes="Bold" />
+    </VerticalStackLayout>
+
+</ContentPage>
