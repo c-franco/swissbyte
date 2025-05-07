@@ -1,4 +1,6 @@
-﻿namespace swissbyte
+﻿using swissbyte.Helpers;
+
+namespace swissbyte
 {
     public partial class App : Application
     {

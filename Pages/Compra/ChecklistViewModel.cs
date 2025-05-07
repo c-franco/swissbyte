@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace swissbyte.Boxes.Compra
+namespace swissbyte.Pages.Compra
 {
     public class ChecklistViewModel
     {

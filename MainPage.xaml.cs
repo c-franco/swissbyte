@@ -3,7 +3,7 @@ using Android.Views;
 using Microsoft.Maui.Platform;
 #endif
 
-using swissbyte.Boxes.Compra;
+using swissbyte.Pages.Compra;
 
 namespace swissbyte
 {

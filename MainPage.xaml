@@ -31,60 +31,60 @@
                     </Frame.GestureRecognizers>
                 </Frame>
 
-                <!-- Caja 2 -->
+                <!-- Caja 2 --><!--
                 <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
                         <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
                         <Label Text="Caja 2" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                    <!--<Frame.GestureRecognizers>
+                    --><!--<Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Box1_Tapped" />
-                    </Frame.GestureRecognizers>-->
+                    </Frame.GestureRecognizers>--><!--
                 </Frame>
 
-                <!-- Caja 3 -->
+                --><!-- Caja 3 --><!--
                 <Frame Grid.Row="0" Grid.Column="2" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
                         <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
                         <Label Text="Caja 3" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                    <!--<Frame.GestureRecognizers>
+                    --><!--<Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Box1_Tapped" />
-                    </Frame.GestureRecognizers>-->
+                    </Frame.GestureRecognizers>--><!--
                 </Frame>
 
-                <!-- Caja 4 -->
+                --><!-- Caja 4 --><!--
                 <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
                         <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
                         <Label Text="Caja 4" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                    <!--<Frame.GestureRecognizers>
+                    --><!--<Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Box1_Tapped" />
-                    </Frame.GestureRecognizers>-->
+                    </Frame.GestureRecognizers>--><!--
                 </Frame>
 
-                <!-- Caja 5 -->
+                --><!-- Caja 5 --><!--
                 <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
                         <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
                         <Label Text="Caja 5" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                    <!--<Frame.GestureRecognizers>
+                    --><!--<Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Box1_Tapped" />
-                    </Frame.GestureRecognizers>-->
+                    </Frame.GestureRecognizers>--><!--
                 </Frame>
 
-                <!-- Caja 6 -->
+                --><!-- Caja 6 --><!--
                 <Frame Grid.Row="1" Grid.Column="2" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
                         <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
                         <Label Text="Caja 6" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
-                    <!--<Frame.GestureRecognizers>
+                    --><!--<Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Box1_Tapped" />
-                    </Frame.GestureRecognizers>-->
-                </Frame>
+                    </Frame.GestureRecognizers>--><!--
+                </Frame>-->
             </Grid>
             
         </VerticalStackLayout>

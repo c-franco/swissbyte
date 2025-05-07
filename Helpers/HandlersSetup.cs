@@ -6,7 +6,7 @@ using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Platform;
 
-namespace swissbyte
+namespace swissbyte.Helpers
 {
     public static class HandlersSetup
     {

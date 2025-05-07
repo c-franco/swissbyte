@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace swissbyte.Boxes.Compra
+namespace swissbyte.Pages.Compra
 {
     public class ChecklistItem : INotifyPropertyChanged
     {

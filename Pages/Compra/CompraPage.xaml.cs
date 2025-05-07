@@ -1,4 +1,4 @@
-namespace swissbyte.Boxes.Compra;
+namespace swissbyte.Pages.Compra;
 
 public partial class CompraPage : ContentPage
 {

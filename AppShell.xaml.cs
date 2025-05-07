@@ -1,4 +1,4 @@
-﻿using swissbyte.Boxes.Compra;
+﻿using swissbyte.Pages.Compra;
 
 namespace swissbyte
 {
