@@ -3,55 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="swissbyte.Pages.FreeGames.FreeGamesPage"
              xmlns:freeGames="clr-namespace:swissbyte.Pages.FreeGames"
+             xmlns:helpers="clr-namespace:swissbyte.Helpers"
              BackgroundColor="{StaticResource MainGray}"
              Shell.BackgroundColor="{StaticResource MainGray}"
              Shell.ForegroundColor="{StaticResource GrayText}"
              Shell.TitleColor="{StaticResource GrayText}"
              Title="Juegos gratis">
 
-    <CollectionView ItemsSource="{Binding Games}">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame Margin="20" Padding="13" CornerRadius="12" HasShadow="True" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}">
-                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="10" ColumnSpacing="10">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:MultiBoolAndConverter x:Key="MultiBoolAndConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <CollectionView x:Name="GamesCollectionView"
+                        ItemsSource="{Binding Games}"
+                        Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="10" CornerRadius="12" HasShadow="True" Padding="18" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}">
+                        <VerticalStackLayout>
+                            <Image Source="{Binding ImageUrl}" HeightRequest="100" Aspect="AspectFill" />
+                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0" TextColor="White" />
+                            <Label Text="{Binding Platform}" FontSize="14" TextColor="{StaticResource GrayText}" />
+                            <Label Text="{Binding TimeLeft}" FontSize="12" TextColor="Red"/>
+                            <Button Text="Ver juego" FontAttributes="Bold" FontSize="14"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type freeGames:FreeGamesPage}}, Path=OpenUrlCommand}" 
+                                    CommandParameter="{Binding RedirectUrl}" BackgroundColor="White" TextColor="Black"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-                        <!-- Imagen -->
-                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
-                           Source="{Binding ImageUrl}"
-                           WidthRequest="120" HeightRequest="100"
-                           Aspect="AspectFill"
-                           VerticalOptions="Center" />
+        <!-- Loading -->
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Color="{StaticResource GrayText}"
+                           WidthRequest="65"
+                           HeightRequest="65"
+                           Margin="0,0,0,150"/>
 
-                        <!-- Textos -->
-                        <StackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
-                            <Label Text="{Binding Title}"
-                               FontAttributes="Bold"
-                               FontSize="16" />
+        <!-- Mensaje si no hay resultados -->
+        <Label Text="¡Ups! No hay juegos ahora."
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="{StaticResource GrayText}"
+               FontSize="17"
+               FontAttributes="Bold"
+               Margin="0,0,0,150">
+            <Label.IsVisible>
+                <MultiBinding Converter="{StaticResource MultiBoolAndConverter}">
+                    <Binding Path="IsLoading" />
+                    <Binding Path="HasResults" />
+                </MultiBinding>
+            </Label.IsVisible>
+        </Label>
 
-                            <Label Text="{Binding Platform}"
-                               FontSize="14"
-                               TextColor="Gray" />
-
-                            <Label Text="{Binding TimeLeft}"
-                               FontSize="12"
-                               TextColor="DarkRed" />
-                        </StackLayout>
-
-                        <!-- Botón -->
-                        <Button Grid.Row="1" Grid.Column="1"
-                            Text="Ir a la oferta"
-                            Command="{Binding Source={RelativeSource AncestorType={x:Type freeGames:FreeGamesPage}}, Path=BindingContext.OpenUrlCommand}"
-                            CommandParameter="{Binding RedirectUrl}"
-                            BackgroundColor="#2196F3"
-                            TextColor="White"
-                            CornerRadius="5"
-                            HorizontalOptions="Start"
-                            Padding="10,5" />
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-
-
+    </Grid>
 </ContentPage>

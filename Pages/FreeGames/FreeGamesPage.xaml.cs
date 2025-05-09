@@ -1,13 +1,31 @@
 using HtmlAgilityPack;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace swissbyte.Pages.FreeGames;
 
-public partial class FreeGamesPage : ContentPage
+public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
 {
     public ObservableCollection<GameInfo> Games { get; set; } = new();
     public ICommand OpenUrlCommand { get; }
+
+    bool isLoading;
+    public bool IsLoading
+    {
+        get => isLoading;
+        set
+        {
+            if (isLoading != value)
+            {
+                isLoading = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool HasResults => Games?.Any() == true;
 
     public FreeGamesPage()
 	{
@@ -25,17 +43,27 @@ public partial class FreeGamesPage : ContentPage
 
     }
 
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged([CallerMemberName] string name = "") =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
     private async void LoadFreeGames()
     {
+        IsLoading = true;
+        OnPropertyChanged(nameof(IsLoading));
+
         var freeGames = await GetFreeGames();
 
         Games.Clear();
 
         foreach (var game in freeGames)
-        {
             Games.Add(game);
-        }
+
+        OnPropertyChanged(nameof(HasResults));
+        IsLoading = false;
+        OnPropertyChanged(nameof(IsLoading));
     }
+
 
     public async Task<List<GameInfo>> GetFreeGames()
     {
