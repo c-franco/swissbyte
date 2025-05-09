@@ -1,7 +1,7 @@
 using HtmlAgilityPack;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -9,24 +9,28 @@ namespace swissbyte.Pages.FreeGames;
 
 public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
 {
+    private static readonly HttpClient httpClient = new HttpClient();
     public ObservableCollection<GameInfo> Games { get; set; } = new();
     public ICommand OpenUrlCommand { get; }
+    public bool HasResults => Games?.Any() == true;
 
-    bool isLoading;
+    bool _isLoading;
     public bool IsLoading
     {
-        get => isLoading;
+        get => _isLoading;
         set
         {
-            if (isLoading != value)
+            if (_isLoading != value)
             {
-                isLoading = value;
+                _isLoading = value;
                 OnPropertyChanged();
             }
         }
     }
 
-    public bool HasResults => Games?.Any() == true;
+    public event PropertyChangedEventHandler PropertyChanged;
+    void OnPropertyChanged([CallerMemberName] string name = "") =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
     public FreeGamesPage()
 	{
@@ -34,31 +38,31 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
 
         BindingContext = this;
 
+        PageSetup();
         LoadFreeGames();
+
 
         OpenUrlCommand = new Command<string>(async (url) =>
         {
             if (!string.IsNullOrWhiteSpace(url))
                 await Launcher.Default.OpenAsync(url);
         });
-
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    void OnPropertyChanged([CallerMemberName] string name = "") =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private void PageSetup()
+    {
+        if (!httpClient.DefaultRequestHeaders.Contains("User-Agent"))
+        {
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
+        }
+    }
 
     private async void LoadFreeGames()
     {
         IsLoading = true;
         OnPropertyChanged(nameof(IsLoading));
 
-        Stopwatch sw = Stopwatch.StartNew();
-
         var freeGames = await GetFreeGames();
-
-        sw.Stop();
-        var test = sw.ElapsedMilliseconds;
 
         Games.Clear();
 
@@ -75,13 +79,12 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
         var games = new List<GameInfo>();
         var url = "https://gg.deals/deals/pc/?maxPrice=0&minDiscount=100&minRating=0";
 
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
-
         var html = await httpClient.GetStringAsync(url);
 
         var doc = new HtmlDocument();
         doc.LoadHtml(html);
+
+        var gameTasks = new List<Task<GameInfo>>();
 
         try
         {
@@ -95,70 +98,74 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
                     {
                         foreach (var gameBox in gameBoxes)
                         {
-                            var titleNode = gameBox?.SelectSingleNode(".//div[contains(@class,'game-info-title')]/a");
-                            var title = titleNode?.InnerText.Trim() ?? "";
-
-                            var shopName = gameBox?.GetAttributeValue("data-shop-name", "");
-
-                            var imageNode = gameBox?.SelectSingleNode(".//a[contains(@class, 'main-image')]/picture/img");
-                            var imageUrl = imageNode?.GetAttributeValue("src", "") ?? "";
-
-                            var redirectNode = gameBox?.SelectSingleNode(".//div[contains(@class, 'game-cta')]/a[contains(@class, 'shop-link')]");
-                            var redirectHref = redirectNode?.GetAttributeValue("href", "") ?? "";
-                            var redirectUrl = string.IsNullOrEmpty(redirectHref) ? "" : $"https://gg.deals{redirectHref}";
-
-                            var gameHref = titleNode?.GetAttributeValue("href", "");
-                            var gameUrl = string.IsNullOrEmpty(gameHref) ? "" : $"https://gg.deals{gameHref}";
-
-                            string date = await GetGameTimeLeft(gameUrl);
-                            string timeLeft = string.Empty;
-                            if (date != null && date != string.Empty)
-                            {
-                                DateTime dateTime = DateTime.Parse(date, null, System.Globalization.DateTimeStyles.RoundtripKind);
-                                var culture = new System.Globalization.CultureInfo("es-ES");
-                                timeLeft = dateTime.ToLocalTime().ToString("dddd, dd MMMM yyyy HH:mm", culture);
-                            }
-
-                            games.Add(new GameInfo
-                            {
-                                Title = title,
-                                Platform = shopName,
-                                TimeLeft = timeLeft,
-                                ImageUrl = imageUrl,
-                                RedirectUrl = redirectUrl
-                            });
+                            gameTasks.Add(ProcessGameBoxAsync(gameBox));
                         }
                     }
                 }
             }
         }
-        catch { }
+        catch (Exception) { }
+
+        var results = await Task.WhenAll(gameTasks);
+        games.AddRange(results);
 
         return games;
     }
 
-    public async Task<string> GetGameTimeLeft(string gameUrl)
+    private async Task<GameInfo> ProcessGameBoxAsync(HtmlNode gameBox)
     {
-        var timeLeft = string.Empty;
+        var titleNode = gameBox?.SelectSingleNode(".//div[contains(@class,'game-info-title')]/a");
+        var title = titleNode?.InnerText.Trim() ?? "";
 
-        var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0");
+        var shopName = gameBox?.GetAttributeValue("data-shop-name", "");
 
-        var html = await httpClient.GetStringAsync(gameUrl);
+        var imageNode = gameBox?.SelectSingleNode(".//a[contains(@class, 'main-image')]/picture/img");
+        var imageUrl = imageNode?.GetAttributeValue("src", "") ?? "";
 
-        var doc = new HtmlDocument();
-        doc.LoadHtml(html);
+        var redirectNode = gameBox?.SelectSingleNode(".//div[contains(@class, 'game-cta')]/a[contains(@class, 'shop-link')]");
+        var redirectHref = redirectNode?.GetAttributeValue("href", "") ?? "";
+        var redirectUrl = string.IsNullOrEmpty(redirectHref) ? "" : $"https://gg.deals{redirectHref}";
 
-        try
+        var gameHref = titleNode?.GetAttributeValue("href", "");
+        var gameUrl = string.IsNullOrEmpty(gameHref) ? "" : $"https://gg.deals{gameHref}";
+
+        string date = await GetGameTimeLeft(gameUrl);
+        string timeLeft = "";
+
+        if (!string.IsNullOrEmpty(date))
         {
-            var timeNode = doc.DocumentNode.SelectSingleNode("//time[contains(@class, 'timesince') and @datetime]");
-            if (timeNode != null)
+            if (DateTime.TryParse(date, null, DateTimeStyles.RoundtripKind, out DateTime dateTime))
             {
-                timeLeft = timeNode.GetAttributeValue("datetime", "");
+                var culture = new CultureInfo("es-ES");
+                timeLeft = dateTime.ToLocalTime().ToString("dddd, dd MMMM yyyy HH:mm", culture);
             }
         }
-        catch { }
 
-        return timeLeft;
+        return new GameInfo
+        {
+            Title = title,
+            Platform = shopName,
+            TimeLeft = timeLeft,
+            ImageUrl = imageUrl,
+            RedirectUrl = redirectUrl
+        };
+    }
+
+
+    private async Task<string> GetGameTimeLeft(string gameUrl)
+    {
+        try
+        {
+            var html = await httpClient.GetStringAsync(gameUrl);
+            var doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            var timeNode = doc.DocumentNode.SelectSingleNode("//time[contains(@class, 'timesince') and @datetime]");
+            return timeNode?.GetAttributeValue("datetime", "") ?? "";
+        }
+        catch
+        {
+            return "";
+        }
     }
 }
