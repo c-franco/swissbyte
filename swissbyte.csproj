@@ -24,7 +24,7 @@
 		<ApplicationTitle>swissbyte</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.swissbyte</ApplicationId>
+		<ApplicationId>com.breathink.swissbyte</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -63,6 +63,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="HtmlAgilityPack" Version="1.12.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -70,6 +71,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Compra\CompraPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\FreeGames\FreeGamesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
