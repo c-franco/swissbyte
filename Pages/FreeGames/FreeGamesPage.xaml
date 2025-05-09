@@ -13,22 +13,24 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <helpers:MultiBoolAndConverter x:Key="MultiBoolAndConverter"/>
+            <helpers:StringNotEmptyConverter x:Key="StringNotEmptyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <Grid>
         <CollectionView x:Name="GamesCollectionView"
                         ItemsSource="{Binding Games}"
-                        Margin="10">
+                        Margin="10,5,10,0">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="10" CornerRadius="12" HasShadow="True" Padding="18" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}">
+                    <Frame Margin="8" CornerRadius="12" HasShadow="True" Padding="18" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}">
                         <VerticalStackLayout>
                             <Image Source="{Binding ImageUrl}" HeightRequest="100" Aspect="AspectFill" />
                             <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" Margin="0,5,0,0" TextColor="White" />
-                            <Label Text="{Binding Platform}" FontSize="14" TextColor="{StaticResource GrayText}" />
-                            <Label Text="{Binding TimeLeft}" FontSize="12" TextColor="Red"/>
-                            <Button Text="Ver juego" FontAttributes="Bold" FontSize="14"
+                            <Label Text="{Binding Platform}" FontSize="14" TextColor="{StaticResource GrayText}" Margin="0,0,0,0" />
+                            <Label Text="{Binding TimeLeft, StringFormat='Hasta: {0}'}" FontSize="12" TextColor="{StaticResource TimeLeftText}" Margin="0,1,0,0" 
+                                   IsVisible="{Binding TimeLeft, Converter={StaticResource StringNotEmptyConverter}}"/>
+                            <Button Text="Ver juego" FontAttributes="Bold" FontSize="14" Margin="0,6,0,0"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type freeGames:FreeGamesPage}}, Path=OpenUrlCommand}" 
                                     CommandParameter="{Binding RedirectUrl}" BackgroundColor="White" TextColor="Black"/>
                         </VerticalStackLayout>

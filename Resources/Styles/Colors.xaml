@@ -7,9 +7,11 @@
     <Color x:Key="MainGray">#121214</Color>
     <Color x:Key="SecondGray">#29292d</Color>
     <Color x:Key="Borders">#333337</Color>
+    
     <Color x:Key="GrayText">#E1E1E1</Color>
     <Color x:Key="SelectedText">#ACCEF7</Color>
     <Color x:Key="CheckedItemText">#67676e</Color>
+    <Color x:Key="TimeLeftText">#919191</Color>
 
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
