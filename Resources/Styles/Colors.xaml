@@ -9,6 +9,7 @@
     <Color x:Key="Borders">#333337</Color>
     
     <Color x:Key="GrayText">#E1E1E1</Color>
+    <Color x:Key="MediumGrayText">#c2c2c4</Color>
     <Color x:Key="SelectedText">#ACCEF7</Color>
     <Color x:Key="CheckedItemText">#67676e</Color>
     <Color x:Key="TimeLeftText">#919191</Color>

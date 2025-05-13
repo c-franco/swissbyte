@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using swissbyte.Interfaces;
+#if ANDROID
+using swissbyte.Platforms.Android;
+#endif
 
 namespace swissbyte
 {
@@ -15,10 +19,15 @@ namespace swissbyte
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
+            #if DEBUG
     		builder.Logging.AddDebug();
-#endif
+            #endif
 
+            #if ANDROID
+            builder.Services.AddSingleton<IBatteryService, BatteryService>();
+            builder.Services.AddSingleton<IDeviceInfoService, DeviceInfoService>();
+            #endif
+            
             return builder.Build();
         }
     }

@@ -1,10 +1,9 @@
 ﻿#if ANDROID
-using Android.Views;
 using Microsoft.Maui.Platform;
 #endif
-
 using swissbyte.Pages.Compra;
 using swissbyte.Pages.FreeGames;
+using swissbyte.Pages.SystemInfo;
 
 namespace swissbyte
 {
@@ -14,7 +13,6 @@ namespace swissbyte
         {
             InitializeComponent();
         }
-
 
         protected override void OnAppearing()
         {
@@ -39,6 +37,11 @@ namespace swissbyte
         private async void FreeGames_Tapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FreeGamesPage());
+        }
+
+        private async void SystemInfo_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SystemInfoPage());
         }
     }
 }

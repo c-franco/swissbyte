@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="swissbyte.Pages.SystemInfo.SystemInfoPage"
+             BackgroundColor="{StaticResource MainGray}"
+             Shell.BackgroundColor="{StaticResource MainGray}"
+             Shell.ForegroundColor="{StaticResource GrayText}"
+             Shell.TitleColor="{StaticResource GrayText}"
+             Title="Info del sistema">
+
+    <VerticalStackLayout Padding="20">
+
+        <!-- Battery Health -->
+        <Frame BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True">
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <Image Source="safe_battery.svg" HorizontalOptions="Center" WidthRequest="40" HeightRequest="40" Margin="0,0,0,5"/>
+                <Label Text="{Binding BatteryHealth}" FontSize="24" HorizontalOptions="Center" TextColor="{StaticResource GrayText}" Margin="0,0,0,3"/>
+                <Label Text="SALUD DE LA BATERÍA" FontSize="10" HorizontalOptions="Center" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+            </StackLayout>
+        </Frame>
+
+        <Grid ColumnSpacing="10" RowSpacing="10" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout Grid.Column="0" Spacing="10">
+                <!-- Battery Status -->
+                <Frame BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" >
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="Start">
+                        <Label Text="ESTADO" FontSize="10" HorizontalOptions="Start" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                        <Label Text="{Binding BatteryState}" FontSize="19" HorizontalOptions="Start" TextColor="{StaticResource GrayText}" Margin="0,0,0,0"/>
+                        <Image Source="bolt.svg" HorizontalOptions="Start" WidthRequest="30" HeightRequest="30" Margin="0,15,0,0"/>
+                    </StackLayout>
+                </Frame>
+                <!-- Charging Source -->
+                <Frame BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" >
+                    <StackLayout VerticalOptions="Start" HorizontalOptions="Start">
+                        <Label Text="FUENTE DE CARGA" FontSize="10" HorizontalOptions="Start" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                        <Label Text="{Binding PowerSource}" FontSize="19" HorizontalOptions="Start" TextColor="{StaticResource GrayText}" Margin="0,0,0,0"/>
+                        <Image Source="plug_bolt_charger.svg" HorizontalOptions="Start" WidthRequest="30" HeightRequest="30" Margin="0,15,0,0"/>
+                    </StackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Battery Level -->
+            <Frame Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="NIVEL DE BATERÍA" FontSize="10" HorizontalOptions="Center" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding ChargeLevel}" FontSize="26" HorizontalOptions="Center" TextColor="{StaticResource GrayText}" Margin="0,0,0,20"/>
+                    <Image Source="{Binding IconName}" HorizontalOptions="Center" WidthRequest="45" HeightRequest="45" Margin="0,15,0,0">
+                    </Image>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <Grid ColumnSpacing="10" RowSpacing="0" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Battery Type -->
+            <Frame Grid.Column="0" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="TIPO" FontSize="10" HorizontalOptions="Center" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding BatteryType}" FontSize="19" HorizontalOptions="Center" TextColor="{StaticResource GrayText}" Margin="0,2,0,0"/>
+                    <Image Source="info.svg" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30" Margin="0,15,0,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Temperature -->
+            <Frame Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="TEMPERATURA" FontSize="10" HorizontalOptions="Center" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding Temperature}" FontSize="18" HorizontalOptions="Center" TextColor="{StaticResource GrayText}" Margin="0,2,0,0"/>
+                    <Image Source="temperature_low.svg" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30" Margin="0,15,0,0"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Voltage -->
+            <Frame Grid.Column="2" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="VOLTAJE" FontSize="10" HorizontalOptions="Center" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding Voltage}" FontSize="17" HorizontalOptions="Center" TextColor="{StaticResource GrayText}" Margin="0,2,0,0"/>
+                    <Image Source="bolt.svg" HorizontalOptions="Center" WidthRequest="30" HeightRequest="30" Margin="0,15,0,0"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <Grid ColumnSpacing="10" RowSpacing="10" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Android Version -->
+            <Frame BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" Grid.Column="0">
+                <StackLayout VerticalOptions="Start" HorizontalOptions="Start">
+                    <Label Text="VERSIÓN ANDROID" FontSize="10" HorizontalOptions="Start" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding AndroidVersion}" FontSize="22" HorizontalOptions="Start" TextColor="{StaticResource GrayText}" Margin="0,0,0,0"/>
+                    <Image Source="android.svg" HorizontalOptions="Start" WidthRequest="40" HeightRequest="40" Margin="0,15,0,0"/>
+                </StackLayout>
+            </Frame>
+            <!-- Device Name -->
+            <Frame BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="25" HasShadow="True" Grid.Column="1">
+                <StackLayout VerticalOptions="Start" HorizontalOptions="Start">
+                    <Label Text="MODELO" FontSize="10" HorizontalOptions="Start" TextColor="{StaticResource MediumGrayText}" CharacterSpacing="1" />
+                    <Label Text="{Binding Model}" FontSize="16" HorizontalOptions="Start" TextColor="{StaticResource GrayText}" Margin="0,0,0,0"/>
+                    <Image Source="device.svg" HorizontalOptions="Start" WidthRequest="30" HeightRequest="30" Margin="0,22,0,0"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+    </VerticalStackLayout>
+    
+</ContentPage>
