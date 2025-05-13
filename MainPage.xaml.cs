@@ -4,6 +4,7 @@ using Microsoft.Maui.Platform;
 using swissbyte.Pages.Compra;
 using swissbyte.Pages.FreeGames;
 using swissbyte.Pages.SystemInfo;
+using swissbyte.Pages.Weighing;
 
 namespace swissbyte
 {
@@ -42,6 +43,11 @@ namespace swissbyte
         private async void SystemInfo_Tapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SystemInfoPage());
+        }
+        
+        private async void Weighing_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new WeighingPage());
         }
     }
 }
