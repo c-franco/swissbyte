@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace swissbyte.Pages.SystemInfo
+namespace swissbyte.ViewModels
 {
     public class SystemInfoViewModel : INotifyPropertyChanged
     {

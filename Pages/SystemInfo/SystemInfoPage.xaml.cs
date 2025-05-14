@@ -1,4 +1,5 @@
 using swissbyte.Interfaces;
+using swissbyte.ViewModels;
 
 namespace swissbyte.Pages.SystemInfo
 {

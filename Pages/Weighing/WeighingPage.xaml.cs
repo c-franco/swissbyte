@@ -1,10 +1,11 @@
-﻿using System.Text.Json;
+﻿using swissbyte.Models;
+using System.Text.Json;
 
 namespace swissbyte.Pages.Weighing 
 {
     public partial class WeighingPage : ContentPage
     {
-        private List<WeightEntry> entries = new();
+        private List<WeightEntryModel> entries = new();
 
         private const string StorageKey = "WeightEntries";
 
@@ -19,7 +20,7 @@ namespace swissbyte.Pages.Weighing
         {
             if (double.TryParse(WeightEntry.Text, out double weight))
             {
-                var newEntry = new WeightEntry
+                var newEntry = new WeightEntryModel
                 {
                     Date = DateTime.Now.ToString("dd/MM/yyyy"),
                     Weight = weight
@@ -62,7 +63,7 @@ namespace swissbyte.Pages.Weighing
 
             if (!string.IsNullOrEmpty(json))
             {
-                entries = JsonSerializer.Deserialize<List<WeightEntry>>(json);
+                entries = JsonSerializer.Deserialize<List<WeightEntryModel>>(json);
             }
 
             RefreshList();

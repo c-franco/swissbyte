@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace swissbyte.Pages.Compra
+namespace swissbyte.Models
 {
-    public class ChecklistItem : INotifyPropertyChanged
+    public class ListItemModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event Action Changed;

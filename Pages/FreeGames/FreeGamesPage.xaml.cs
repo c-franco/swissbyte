@@ -1,4 +1,5 @@
 using HtmlAgilityPack;
+using swissbyte.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
@@ -10,7 +11,7 @@ namespace swissbyte.Pages.FreeGames;
 public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
 {
     private static readonly HttpClient httpClient = new HttpClient();
-    public ObservableCollection<GameInfo> Games { get; set; } = new();
+    public ObservableCollection<GameInfoModel> Games { get; set; } = new();
     public ICommand OpenUrlCommand { get; }
     public bool HasResults => Games?.Any() == true;
 
@@ -74,9 +75,9 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
         OnPropertyChanged(nameof(IsLoading));
     }
 
-    public async Task<List<GameInfo>> GetFreeGames()
+    public async Task<List<GameInfoModel>> GetFreeGames()
     {
-        var games = new List<GameInfo>();
+        var games = new List<GameInfoModel>();
         var url = "https://gg.deals/deals/pc/?maxPrice=0&minDiscount=100&minRating=0";
 
         var html = await httpClient.GetStringAsync(url);
@@ -84,7 +85,7 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
         var doc = new HtmlDocument();
         doc.LoadHtml(html);
 
-        var gameTasks = new List<Task<GameInfo>>();
+        var gameTasks = new List<Task<GameInfoModel>>();
 
         try
         {
@@ -112,7 +113,7 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
         return games;
     }
 
-    private async Task<GameInfo> ProcessGameBoxAsync(HtmlNode gameBox)
+    private async Task<GameInfoModel> ProcessGameBoxAsync(HtmlNode gameBox)
     {
         var titleNode = gameBox?.SelectSingleNode(".//div[contains(@class,'game-info-title')]/a");
         var title = titleNode?.InnerText.Trim() ?? "";
@@ -141,7 +142,7 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
             }
         }
 
-        return new GameInfo
+        return new GameInfoModel
         {
             Title = title,
             Platform = shopName,
@@ -150,7 +151,6 @@ public partial class FreeGamesPage : ContentPage, INotifyPropertyChanged
             RedirectUrl = redirectUrl
         };
     }
-
 
     private async Task<string> GetGameTimeLeft(string gameUrl)
     {

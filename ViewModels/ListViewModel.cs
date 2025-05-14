@@ -1,28 +1,29 @@
-﻿using System.Collections.ObjectModel;
+﻿using swissbyte.Models;
+using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace swissbyte.Pages.Compra
+namespace swissbyte.ViewModels
 {
-    public class ChecklistViewModel
+    public class ListViewModel
     {
-        public ObservableCollection<ChecklistItem> Items { get; } = new();
+        public ObservableCollection<ListItemModel> Items { get; } = new();
 
         private const string StorageKey = "ChecklistItems";
 
-        public ChecklistViewModel()
+        public ListViewModel()
         {
             LoadItems();
         }
 
         public void AddItem()
         {
-            var item = new ChecklistItem { Text = "", IsChecked = false, IsNew = true }; 
+            var item = new ListItemModel { Text = "", IsChecked = false, IsNew = true }; 
             item.Changed += SaveItems;
             Items.Add(item);
             SaveItems();
         }
 
-        public void RemoveItem(ChecklistItem item)
+        public void RemoveItem(ListItemModel item)
         {
             if (Items.Contains(item))
             {
@@ -44,12 +45,12 @@ namespace swissbyte.Pages.Compra
             var json = Preferences.Get(StorageKey, string.Empty);
             if (!string.IsNullOrWhiteSpace(json))
             {
-                var items = JsonSerializer.Deserialize<List<ChecklistItem>>(json);
+                var items = JsonSerializer.Deserialize<List<ListItemModel>>(json);
                 if (items != null)
                 {
                     foreach (var raw in items)
                     {
-                        var item = new ChecklistItem
+                        var item = new ListItemModel
                         {
                             Text = raw.Text,
                             IsChecked = raw.IsChecked

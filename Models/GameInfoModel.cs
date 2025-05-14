@@ -1,6 +1,6 @@
-﻿namespace swissbyte.Pages.FreeGames
+﻿namespace swissbyte.Models
 {
-    public class GameInfo
+    public class GameInfoModel
     {
         public string Title { get; set; }
         public string Platform { get; set; }

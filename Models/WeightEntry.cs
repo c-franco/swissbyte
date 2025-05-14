@@ -1,6 +1,6 @@
-﻿namespace swissbyte.Pages.Weighing
+﻿namespace swissbyte.Models
 {
-    public class WeightEntry
+    public class WeightEntryModel
     {
         public string Date { get; set; }
         public double Weight { get; set; }

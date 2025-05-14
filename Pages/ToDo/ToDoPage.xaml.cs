@@ -1,8 +1,11 @@
+using swissbyte.Models;
+using swissbyte.ViewModels;
+
 namespace swissbyte.Pages.ToDo
 {
     public partial class ToDoPage : ContentPage
     {
-        ToDoViewModel viewModel = new();
+        ListViewModel viewModel = new();
 
         public ToDoPage()
         {
@@ -18,7 +21,7 @@ namespace swissbyte.Pages.ToDo
 
         private void OnRemoveClicked(object sender, EventArgs e)
         {
-            var item = (sender as Button)?.CommandParameter as ToDoItem;
+            var item = (sender as Button)?.CommandParameter as ListItemModel;
             if (item != null)
                 viewModel.RemoveItem(item);
         }
@@ -31,7 +34,7 @@ namespace swissbyte.Pages.ToDo
         private void Entry_Loaded(object sender, EventArgs e)
         {
             var entry = (Entry)sender;
-            if (entry.BindingContext is ToDoItem item && item.IsNew)
+            if (entry.BindingContext is ListItemModel item && item.IsNew)
             {
                 item.IsNew = false;
                 Dispatcher.Dispatch(() => entry.Focus());

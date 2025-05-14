@@ -1,8 +1,11 @@
+using swissbyte.Models;
+using swissbyte.ViewModels;
+
 namespace swissbyte.Pages.Compra
 {
     public partial class CompraPage : ContentPage
     {
-        ChecklistViewModel viewModel = new();
+        ListViewModel viewModel = new();
 
         public CompraPage()
         {
@@ -18,7 +21,7 @@ namespace swissbyte.Pages.Compra
 
         private void OnRemoveClicked(object sender, EventArgs e)
         {
-            var item = (sender as Button)?.CommandParameter as ChecklistItem;
+            var item = (sender as Button)?.CommandParameter as ListItemModel;
             if (item != null)
                 viewModel.RemoveItem(item);
         }
@@ -31,7 +34,7 @@ namespace swissbyte.Pages.Compra
         private void Entry_Loaded(object sender, EventArgs e)
         {
             var entry = (Entry)sender;
-            if (entry.BindingContext is ChecklistItem item && item.IsNew)
+            if (entry.BindingContext is ListItemModel item && item.IsNew)
             {
                 item.IsNew = false;
                 Dispatcher.Dispatch(() => entry.Focus());
