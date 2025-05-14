@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="swissbyte.Pages.ToDo.ToDoPage"
+             xmlns:helpers="clr-namespace:swissbyte.Helpers"
+             BackgroundColor="{StaticResource MainGray}"
+             Shell.BackgroundColor="{StaticResource MainGray}"
+             Shell.ForegroundColor="{StaticResource GrayText}"
+             Shell.TitleColor="{StaticResource GrayText}"
+             Title="To-Do">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helpers:CheckedToColorConverter x:Key="CheckedToColorConverter" />
+            <helpers:CheckedToFontStyleConverter x:Key="CheckedToFontStyleConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Spacing="10">
+        <CollectionView ItemsSource="{Binding Items}" Margin="10,0" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10,4" ColumnDefinitions="Auto,*,Auto">
+                        <CheckBox Grid.Column="0" VerticalOptions="Center" Color="{StaticResource GrayText}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                        <Entry Grid.Column="1" Text="{Binding Text}" FontSize="16" HorizontalOptions="FillAndExpand" Completed="OnEntryCompleted" Loaded="Entry_Loaded" Keyboard="Text"
+                           TextColor="{Binding IsChecked, Converter={StaticResource CheckedToColorConverter}}" FontAttributes="{Binding IsChecked, Converter={StaticResource CheckedToFontStyleConverter}}"/>
+                        <Button Grid.Column="2" Text="❌" Clicked="OnRemoveClicked" CommandParameter="{Binding .}" BackgroundColor="Transparent" FontSize="10" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="+  Añadir elemento" Clicked="OnAddClicked" BackgroundColor="Transparent" TextColor="{StaticResource GrayText}" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center" Padding="10" />
+    </VerticalStackLayout>
+    
+</ContentPage>

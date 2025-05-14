@@ -1,10 +1,10 @@
-namespace swissbyte.Pages.Compra
+namespace swissbyte.Pages.ToDo
 {
-    public partial class CompraPage : ContentPage
+    public partial class ToDoPage : ContentPage
     {
-        ChecklistViewModel viewModel = new();
+        ToDoViewModel viewModel = new();
 
-        public CompraPage()
+        public ToDoPage()
         {
             InitializeComponent();
 
@@ -18,7 +18,7 @@ namespace swissbyte.Pages.Compra
 
         private void OnRemoveClicked(object sender, EventArgs e)
         {
-            var item = (sender as Button)?.CommandParameter as ChecklistItem;
+            var item = (sender as Button)?.CommandParameter as ToDoItem;
             if (item != null)
                 viewModel.RemoveItem(item);
         }
@@ -31,7 +31,7 @@ namespace swissbyte.Pages.Compra
         private void Entry_Loaded(object sender, EventArgs e)
         {
             var entry = (Entry)sender;
-            if (entry.BindingContext is ChecklistItem item && item.IsNew)
+            if (entry.BindingContext is ToDoItem item && item.IsNew)
             {
                 item.IsNew = false;
                 Dispatcher.Dispatch(() => entry.Focus());

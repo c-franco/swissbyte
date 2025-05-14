@@ -65,15 +65,15 @@
                 </Frame>
 
                 <!-- Caja 5 -->
-                <!--<Frame Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
+                <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
                     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="7">
-                        <Label Text="📁" FontSize="15" HorizontalOptions="Center"/>
-                        <Label Text="Caja 5" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
+                        <Label Text="📝" FontSize="15" HorizontalOptions="Center"/>
+                        <Label Text="To-Do" FontSize="15" FontAttributes="Bold" FontFamily="OpenSansBold" TextColor="{StaticResource GrayText}" HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Box1_Tapped" />
+                        <TapGestureRecognizer Tapped="ToDo_Tapped" />
                     </Frame.GestureRecognizers>
-                </Frame>-->
+                </Frame>
 
                 <!-- Caja 6 --> 
                 <!--<Frame Grid.Row="1" Grid.Column="2" BackgroundColor="{StaticResource SecondGray}" CornerRadius="12" HasShadow="True" Padding="13" BorderColor="{StaticResource Borders}">
