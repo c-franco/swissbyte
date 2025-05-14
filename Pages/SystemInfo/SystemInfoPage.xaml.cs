@@ -127,8 +127,7 @@ namespace swissbyte.Pages.SystemInfo
         private string GetChargeLevel()
         {
             double batteryLevel = Battery.ChargeLevel * 100;
-
-            return batteryLevel.ToString() + "%" ?? "No disponible";
+            return $"{batteryLevel:F0}%" ?? "No disponible";
         }
 
         private string GetIconName(string batteryLevel)

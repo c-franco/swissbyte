@@ -10,39 +10,79 @@
 
     <VerticalStackLayout Padding="20" Spacing="20">
 
-        <HorizontalStackLayout>
-            <Entry x:Name="WeightEntry"
-                   Placeholder="Introduce tu peso (kg)"
-                   Keyboard="Numeric"
-                   WidthRequest="200" />
-            <Button Text="Guardar"
-                    Clicked="OnSaveClicked" />
+        <!-- Weight Entry -->
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Entry x:Name="WeightEntry" Placeholder="Introduce tu peso (kg)" Keyboard="Numeric" TextChanged="OnWeightEntryTextChanged" PlaceholderColor="{StaticResource CheckedItemText}" TextColor="{StaticResource GrayText}" FontSize="15" Margin="0,0,10,0" />
+            <Button Text="Registrar" Clicked="OnSaveClicked" Margin="10,0,0,0" FontAttributes="Bold" FontSize="14" BackgroundColor="White" TextColor="Black" />
         </HorizontalStackLayout>
 
-        <!--<microcharts:ChartView x:Name="WeightChart"
-                                HeightRequest="200"
-                                ChartType="Line" />-->
+        <Grid RowDefinitions="Auto,Auto" Padding="10,10,10,0">
+            <Frame Grid.Row="0" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="15" Padding="0,20,0,20" HasShadow="True">
+                <Grid ColumnDefinitions="*,*">
+                    
+                    <VerticalStackLayout Spacing="12" Grid.Column="0" HorizontalOptions="Center">
+                        <!-- Initial Weight -->
+                        <VerticalStackLayout Spacing="1">
+                            <Label Text="Peso inicial" FontSize="14" TextColor="{StaticResource MediumGrayText}" />
+                            <Label x:Name="InitialWeightLabel" Text="{Binding PesoInicial}" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource GrayText}" />
+                        </VerticalStackLayout>
+                        <!-- Actual Weight -->
+                        <VerticalStackLayout Spacing="1">
+                            <Label Text="Peso actual" FontSize="14" TextColor="{StaticResource MediumGrayText}" />
+                            <Label x:Name="ActualWeightLabel" Text="{Binding PesoActual}" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource GrayText}" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
 
-        <Label Text="Historial" FontAttributes="Bold" />
-        <CollectionView x:Name="WeightList"
-                        HeightRequest="300">
+                    <VerticalStackLayout Spacing="12" Grid.Column="1" HorizontalOptions="Center">
+                        <!-- Lowest Weight -->
+                        <VerticalStackLayout Spacing="1">
+                            <Label Text="Peso más bajo" FontSize="14" TextColor="{StaticResource MediumGrayText}" />
+                            <Label x:Name="LowestWeightLabel" Text="{Binding PesoMinimo}" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource GrayText}" />
+                        </VerticalStackLayout>
+                        <!-- Highest Weight -->
+                        <VerticalStackLayout Spacing="1">
+                            <Label Text="Peso más alto" FontSize="14" TextColor="{StaticResource MediumGrayText}" />
+                            <Label x:Name="HighestWeightLabel" Text="{Binding PesoMaximo}" FontAttributes="Bold" FontSize="20" TextColor="{StaticResource GrayText}" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Trend -->
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource SecondGray}" BorderColor="{StaticResource Borders}" CornerRadius="15" Padding="20" Margin="0,10,0,0" HasShadow="True">
+                <Grid ColumnDefinitions="*,*">
+                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
+                        <Label Text="Última semana" FontSize="14" TextColor="{StaticResource MediumGrayText}"/>
+                        <Label x:Name="WeeklyTrendLabel" Text="{Binding TendenciaSemanal}" FontAttributes="Bold" FontSize="18" TextColor="{StaticResource GrayText}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                        <Label Text="Último mes" FontSize="14" TextColor="{StaticResource MediumGrayText}"/>
+                        <Label x:Name="MonthlyTrendLabel" Text="{Binding TendenciaMensual}" FontAttributes="Bold" FontSize="18" TextColor="{StaticResource GrayText}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+        </Grid>
+        
+        <!-- Historial -->
+        <Label Text="Historial" TextColor="{StaticResource GrayText}" FontAttributes="Bold" Margin="10,0,0,0" FontSize="17"/>
+        <CollectionView x:Name="WeightList" HeightRequest="410">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="10">
+                    <Grid Padding="80,0,80,8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Label Text="{Binding Date}" />
-                        <Label Text="{Binding Weight}" Grid.Column="1" />
+                        <Label Text="{Binding Date}" TextColor="{StaticResource GrayText}" FontSize="14" VerticalOptions="Center" />
+                        <Label Text="{Binding Weight, StringFormat='{}{0} kg'}" Grid.Column="1" TextColor="{StaticResource GrayText}" FontSize="17" HorizontalOptions="Center" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
     </VerticalStackLayout>
-    
 </ContentPage>
