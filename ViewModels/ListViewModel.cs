@@ -8,10 +8,12 @@ namespace swissbyte.ViewModels
     {
         public ObservableCollection<ListItemModel> Items { get; } = new();
 
-        private const string StorageKey = "ChecklistItems";
+        internal string StorageKey;
 
-        public ListViewModel()
+        public ListViewModel(string storageKey)
         {
+            StorageKey = storageKey;
+
             LoadItems();
         }
 

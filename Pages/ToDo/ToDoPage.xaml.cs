@@ -5,7 +5,9 @@ namespace swissbyte.Pages.ToDo
 {
     public partial class ToDoPage : ContentPage
     {
-        ListViewModel viewModel = new();
+        private const string StorageKey = "ToDoItems";
+
+        ListViewModel viewModel = new(StorageKey);
 
         public ToDoPage()
         {

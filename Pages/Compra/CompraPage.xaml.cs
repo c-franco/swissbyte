@@ -5,7 +5,9 @@ namespace swissbyte.Pages.Compra
 {
     public partial class CompraPage : ContentPage
     {
-        ListViewModel viewModel = new();
+        private const string StorageKey = "CompraItems";
+
+        ListViewModel viewModel = new(StorageKey);
 
         public CompraPage()
         {

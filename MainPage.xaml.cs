@@ -3,8 +3,10 @@ using Microsoft.Maui.Platform;
 #endif
 using swissbyte.Pages.Compra;
 using swissbyte.Pages.FreeGames;
+using swissbyte.Pages.Plans;
 using swissbyte.Pages.SystemInfo;
 using swissbyte.Pages.ToDo;
+using swissbyte.Pages.ToWatch;
 using swissbyte.Pages.Weighing;
 
 namespace swissbyte
@@ -54,6 +56,16 @@ namespace swissbyte
         private async void ToDo_Tapped(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ToDoPage());
+        }
+
+        private async void ToWatch_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ToWatch_Page());
+        }
+
+        private async void Plans_Tapped(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Plans_Page());
         }
     }
 }
