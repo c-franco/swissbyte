@@ -2,13 +2,13 @@ using swissbyte.Config;
 using swissbyte.Models;
 using swissbyte.ViewModels;
 
-namespace swissbyte.Pages.Compra
+namespace swissbyte.Pages.Plans
 {
-    public partial class CompraPage : ContentPage
+    public partial class PlansPage : ContentPage
     {
-        ListViewModel viewModel = new(Constantes.CompraKey);
+        ListViewModel viewModel = new(Constantes.PlansKey);
 
-        public CompraPage()
+        public PlansPage()
         {
             InitializeComponent();
 

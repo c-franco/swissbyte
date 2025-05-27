@@ -1,3 +1,4 @@
+using swissbyte.Config;
 using swissbyte.Models;
 using swissbyte.ViewModels;
 
@@ -5,9 +6,7 @@ namespace swissbyte.Pages.ToDo
 {
     public partial class ToDoPage : ContentPage
     {
-        private const string StorageKey = "ToDoItems";
-
-        ListViewModel viewModel = new(StorageKey);
+        ListViewModel viewModel = new(Constantes.ToDoKey);
 
         public ToDoPage()
         {

@@ -1,4 +1,5 @@
-﻿using swissbyte.Models;
+﻿using swissbyte.Config;
+using swissbyte.Models;
 using System.Text.Json;
 
 namespace swissbyte.Pages.Weighing 
@@ -6,8 +7,6 @@ namespace swissbyte.Pages.Weighing
     public partial class WeighingPage : ContentPage
     {
         private List<WeightEntryModel> entries = new();
-
-        private const string StorageKey = "WeightEntries";
 
         public WeighingPage()
         {
@@ -59,7 +58,7 @@ namespace swissbyte.Pages.Weighing
 
         private void LoadData()
         {
-            var json = Preferences.Get(StorageKey, string.Empty);
+            var json = Preferences.Get(Constantes.WeightKey, string.Empty);
 
             if (!string.IsNullOrEmpty(json))
             {
@@ -73,7 +72,7 @@ namespace swissbyte.Pages.Weighing
         private void SaveData()
         {
             var json = JsonSerializer.Serialize(entries);
-            Preferences.Set(StorageKey, json);
+            Preferences.Set(Constantes.WeightKey, json);
         }
 
         private void RefreshList()
@@ -86,12 +85,12 @@ namespace swissbyte.Pages.Weighing
         {
             if (entries.Count < 1)
             {
-                InitialWeightLabel.Text = "N/D";
-                ActualWeightLabel.Text = "N/D";
-                LowestWeightLabel.Text = "N/D";
-                HighestWeightLabel.Text = "N/D";
-                WeeklyTrendLabel.Text = "N/D";
-                MonthlyTrendLabel.Text = "N/D";
+                InitialWeightLabel.Text = Constantes.NingunDato;
+                ActualWeightLabel.Text = Constantes.NingunDato;
+                LowestWeightLabel.Text = Constantes.NingunDato;
+                HighestWeightLabel.Text = Constantes.NingunDato;
+                WeeklyTrendLabel.Text = Constantes.NingunDato;
+                MonthlyTrendLabel.Text = Constantes.NingunDato;
 
                 return;
             }

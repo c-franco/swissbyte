@@ -1,3 +1,4 @@
+using swissbyte.Config;
 using swissbyte.Interfaces;
 using swissbyte.ViewModels;
 
@@ -15,6 +16,7 @@ namespace swissbyte.Pages.SystemInfo
 
             _batteryHealthService = Application.Current?.Handler.MauiContext?.Services.GetService<IBatteryService>();
             _deviceInfoService = Application.Current?.Handler.MauiContext?.Services.GetService<IDeviceInfoService>();
+
             _viewModel = new SystemInfoViewModel();
             BindingContext = _viewModel;
 
@@ -59,7 +61,7 @@ namespace swissbyte.Pages.SystemInfo
         {
             var batteryHealth = _batteryHealthService?.GetBatteryHealth();
 
-            return batteryHealth ?? "No disponible";
+            return batteryHealth ?? Constantes.NoDisponible;
         }
 
         private string GetBatteryState()
@@ -70,65 +72,65 @@ namespace swissbyte.Pages.SystemInfo
             switch(batteryState)
             {
                 case 0:
-                    esBatteryState = "Desconocido";
+                    esBatteryState = Constantes.Desconocido;
                     break;
                 case 1:
-                    esBatteryState = "Cargando";
+                    esBatteryState = Constantes.BatteryState_Cargando;
                     break;
                 case 2:
-                    esBatteryState = "Descargando";
+                    esBatteryState = Constantes.BatteryState_Descargando;
                     break;
                 case 3:
-                    esBatteryState = "Llena";
+                    esBatteryState = Constantes.BatteryState_Llena;
                     break;
                 case 4:
-                    esBatteryState = "Descargando";
+                    esBatteryState = Constantes.BatteryState_Descargando;
                     break;
                 case 5:
-                    esBatteryState = "No presente";
+                    esBatteryState = Constantes.BatteryState_NoPresente;
                     break;
                 default:
-                    esBatteryState = "Desconocido";
+                    esBatteryState = Constantes.Desconocido;
                     break;
             }
 
-            return esBatteryState ?? "No disponible";
+            return esBatteryState ?? Constantes.NoDisponible;
         }
 
         private string GetPowerSource()
         {
             int powerSource = (int) Battery.PowerSource;
-            string espowerSource = string.Empty;
+            string esPowerSource = string.Empty;
 
             switch (powerSource)
             {
                 case 0:
-                    espowerSource = "Desconocido";
+                    esPowerSource = Constantes.Desconocido;
                     break;
                 case 1:
-                    espowerSource = "Batería";
+                    esPowerSource = Constantes.PowerSource_Bateria;
                     break;
                 case 2:
-                    espowerSource = "Cargador";
+                    esPowerSource = Constantes.PowerSource_Cargador;
                     break;
                 case 3:
-                    espowerSource = "USB";
+                    esPowerSource = Constantes.PowerSource_USB;
                     break;
                 case 4:
-                    espowerSource = "Inalámbrico";
+                    esPowerSource = Constantes.PowerSource_Inalambrico;
                     break;
                 default:
-                    espowerSource = "Desconocido";
+                    esPowerSource = Constantes.Desconocido;
                     break;
             }
 
-            return espowerSource ?? "No disponible";
+            return esPowerSource ?? Constantes.NoDisponible;
         }
 
         private string GetChargeLevel()
         {
             double batteryLevel = Battery.ChargeLevel * 100;
-            return $"{batteryLevel:F0}%" ?? "No disponible";
+            return $"{batteryLevel:F0}%" ?? Constantes.NoDisponible;
         }
 
         private string GetIconName(string batteryLevel)
@@ -155,21 +157,21 @@ namespace swissbyte.Pages.SystemInfo
         {
             var batteryType = _batteryHealthService?.GetBatteryType();
 
-            return batteryType ?? "No disponible";
+            return batteryType ?? Constantes.NoDisponible;
         }
 
         private string GetTemperature()
         {
             var temperature = _batteryHealthService?.GetTemperature();
 
-            return temperature ?? "No disponible";
+            return temperature ?? Constantes.NoDisponible;
         }
 
         private string GetVoltage()
         {
             var voltage = _batteryHealthService?.GetVoltage();
 
-            return voltage ?? "No disponible";
+            return voltage ?? Constantes.NoDisponible;
         }
     }
 }

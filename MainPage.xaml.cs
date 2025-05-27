@@ -60,12 +60,12 @@ namespace swissbyte
 
         private async void ToWatch_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ToWatch_Page());
+            await Navigation.PushAsync(new ToWatchPage());
         }
 
         private async void Plans_Tapped(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Plans_Page());
+            await Navigation.PushAsync(new PlansPage());
         }
     }
 }

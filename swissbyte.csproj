@@ -67,6 +67,16 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\Plans\PlansPage.xaml.cs">
+	    <DependentUpon>PlansPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\ToWatch\ToWatchPage.xaml.cs">
+	    <DependentUpon>ToWatchPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,7 +86,7 @@
 	  <MauiXaml Update="Pages\FreeGames\FreeGamesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Plans\Plans_Page.xaml">
+	  <MauiXaml Update="Pages\Plans\PlansPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SystemInfo\SystemInfoPage.xaml">
@@ -85,7 +95,7 @@
 	  <MauiXaml Update="Pages\ToDo\ToDoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ToWatch\ToWatch_Page.xaml">
+	  <MauiXaml Update="Pages\ToWatch\ToWatchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Weighing\WeighingPage.xaml">
