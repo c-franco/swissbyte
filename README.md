@@ -1,11 +1,14 @@
 # SwissByte - Multipurpose App
 
-<img src="https://raw.githubusercontent.com/c-franco/swissbyte/refs/heads/main/Resources/AppIcon/appicon.png" align="left"
-width="200" hspace="10" vspace="10">
+<div style="overflow: hidden;">
+  <img src="https://raw.githubusercontent.com/c-franco/swissbyte/refs/heads/main/Resources/AppIcon/appicon.png" 
+       style="float: left; width: 200px; margin-right: 10px; margin-bottom: 10px;">
+  <p>
+    An all-in-one application designed exclusively for personal use. The goal is to centralize key tools such as notes, reminders, task management, habit tracking, files and more, all in one place, optimized for efficiency and total control.
+  </p>
+</div>
 
-An all-in-one application designed exclusively for personal use. The goal is to centralize key tools such as notes, reminders, task management, habit tracking, files and more, all in one place, optimized for efficiency and total control.
-
-<div style="clear: left;"></div>
+<div style="clear: both;"></div>
 
 ## ℹ About
 
