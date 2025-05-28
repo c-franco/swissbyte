@@ -5,11 +5,12 @@ width="200" hspace="10" vspace="10">
 
 An all-in-one application designed exclusively for personal use. The goal is to centralize key tools such as notes, reminders, task management, habit tracking, files and more, all in one place, optimized for efficiency and total control.
 
-<div style="clear: both;"></div>
+<div style="clear: left;"></div>
 
 ## ℹ About
 
 This application was born from the need to have a centralized, private and fully adapted space for my daily routines. Instead of relying on multiple separate tools, I decided to create a solution that brings together everything I need: organization, personal tracking and efficient management, all in one place, without distractions or external dependencies.
+
 The goal is to keep expanding it little by little, incorporating new functions that adapt to my real needs as they evolve.
 
 ## 📸 Screenshots
